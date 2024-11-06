@@ -1,4 +1,4 @@
-.ton-connect-page__placeholder {
+.wallet-connect-page__placeholder {
   position: absolute;
   top: 0;
   left: 0;
@@ -7,10 +7,10 @@
   box-sizing: border-box;
 }
 
-.ton-connect-page__button {
+.wallet-connect-page__button {
   margin: 16px auto 0;
 }
 
-.ton-connect-page__button-connected {
+.wallet-connect-page__button-connected {
   margin: 16px 24px 16px auto;
 }

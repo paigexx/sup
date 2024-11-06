@@ -10,19 +10,19 @@ export const IndexPage: FC = () => {
   return (
     <Page back={false}>
       <List>
-        <Section
+        {/* <Section
           header="Features"
           footer="You can use these pages to learn more about features, provided by Telegram Mini Apps and other useful projects"
-        >
-          <Link to="/ton-connect">
+        > */}
+          <Link to="/wallet-connect">
             <Cell
               before={<Image src={tonSvg} style={{ backgroundColor: '#007AFF' }}/>}
-              subtitle="Connect your TON wallet"
+              subtitle="Connect your wallet to begin."
             >
-              TON Connect
+              Wallet Connect
             </Cell>
           </Link>
-        </Section>
+        {/* </Section> */}
         <Section
           header="Application Launch Data"
           footer="These pages help developer to learn more about current launch information"

@@ -1,8 +1,6 @@
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
-
+import {PrivyProvider} from '@privy-io/react-auth';
 import { App } from '@/components/App.tsx';
 import { ErrorBoundary } from '@/components/ErrorBoundary.tsx';
-import { publicUrl } from '@/helpers/publicUrl.ts';
 
 function ErrorBoundaryError({ error }: { error: unknown }) {
   return (
@@ -24,11 +22,23 @@ function ErrorBoundaryError({ error }: { error: unknown }) {
 export function Root() {
   return (
     <ErrorBoundary fallback={ErrorBoundaryError}>
-      <TonConnectUIProvider
-        manifestUrl={publicUrl('tonconnect-manifest.json')}
+       <PrivyProvider
+        appId={import.meta.env.VITE_PRIVY_APP_ID || 
+        ""}
+        config={{
+          loginMethods: ['email', 'wallet'],
+          appearance: {
+            theme: 'light',
+            accentColor: '#676FFF',
+            logo: 'https://your-logo-url',
+          },
+          embeddedWallets: {
+            createOnLogin: 'users-without-wallets',
+          },
+        }}
       >
         <App/>
-      </TonConnectUIProvider>
+      </PrivyProvider>
     </ErrorBoundary>
   );
 }
