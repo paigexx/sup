@@ -1,32 +1,42 @@
-import { Section, Cell, Image, List } from '@telegram-apps/telegram-ui';
+import { Section, Cell, Image, List, Button, Placeholder, Title } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
 
 import { Link } from '@/components/Link/Link.tsx';
 import { Page } from '@/components/Page.tsx';
 
 import tonSvg from './ton.svg';
+import { usePrivy } from '@privy-io/react-auth';
 
 export const IndexPage: FC = () => {
+  const { ready, authenticated, user, login, logout} = usePrivy();
+
+
+  if (ready && !authenticated) {
+    return (
+      <Page>
+    
+        <Placeholder
+          className="wallet-connect-page__placeholder"
+          description={
+            <>
+              <Title>Sup.</Title>
+              <Button onClick={login} className="wallet-connect-page__button">Connect</Button>
+            </>
+          }
+        />
+      </Page>
+    );
+  }
+  if (ready && authenticated) {
+
   return (
     <Page back={false}>
       <List>
-        {/* <Section
-          header="Features"
-          footer="You can use these pages to learn more about features, provided by Telegram Mini Apps and other useful projects"
-        > */}
-          <Link to="/wallet-connect">
-            <Cell
-              before={<Image src={tonSvg} style={{ backgroundColor: '#007AFF' }}/>}
-              subtitle="Connect your wallet to begin."
-            >
-              Wallet Connect
-            </Cell>
-          </Link>
-        {/* </Section> */}
+      <Button onClick={logout} className="wallet-connect-page__button">Disconnect</Button>
         <Section
           header="Application Launch Data"
           footer="These pages help developer to learn more about current launch information"
-        >
+          >
           <Link to="/init-data">
             <Cell subtitle="User data, chat information, technical data">Init Data</Cell>
           </Link>
@@ -40,4 +50,5 @@ export const IndexPage: FC = () => {
       </List>
     </Page>
   );
+  }
 };
